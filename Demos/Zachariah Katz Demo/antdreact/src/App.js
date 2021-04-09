@@ -8,7 +8,16 @@ import { Layout, Menu, Breadcrumb, Dropdown, Row, Col, Divider, Card, PageHeader
 
 const { Header, Content, Footer } = Layout;
 
-var userID = null;
+var userID = 1;
+
+function login() {
+  userID = 1;
+}
+
+function logout() {
+  userID = null;
+}
+
 function loggedin() {
   if (userID != null) {
     return (
@@ -17,7 +26,7 @@ function loggedin() {
         <Menu.Item key="0"><a>Friends</a></Menu.Item>
         <Menu.Item key="1"><a>Settings</a></Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="3">Logout</Menu.Item>
+        <Menu.Item key="3"><a onclick="logout()">Logout</a></Menu.Item>
       </Menu>
     );
   }
@@ -35,7 +44,7 @@ function App() {
     return (
       <div>
       <PageHeader title="Achievement Arena" />
-      <Layout className="layout">
+      <Layout className="header">
       <Header>
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" style={{ alignContent: 'right' }}>
