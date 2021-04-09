@@ -1,4 +1,4 @@
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Select } from 'antd';
 
 const columns = [
   {
@@ -166,9 +166,36 @@ const data = [
   },
 ];
 
+const { Option } = Select;
+
 function Leaderboard() {
   return(
-    <Table title={() => 'Overall Leaderboard'} pagination={{ pageSize: 25 }} size='default' scroll={{ y: 700, x: '1vw' }} columns={columns} dataSource={data} />
+    <Table title=
+      {
+        () => <div>
+        Overall Leaderboard<p />
+        <Select
+          showSearch
+          allowClear
+          style={{ width: 200 }}
+          placeholder="Select a game"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          <Option value="rdr2">Red Dead Redemption 2</Option>
+          <Option value="gtav">Grand Theft Auto V</Option>
+          <Option value="mc">Minecraft</Option>
+        </Select>
+        </div>
+      }
+      pagination={{ pageSize: 10 }}
+      size='default'
+      scroll={{ y: 2000, x: '1vw' }}
+      columns={columns}
+      dataSource={data}
+    />
   );
 }
 
