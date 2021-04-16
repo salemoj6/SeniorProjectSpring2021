@@ -1,4 +1,5 @@
-module.exports = function(app) {
+module.exports = function (app)
+{
     var users = require('../controllers/user.controller.js');
 
     app.post('/api/user', users.addUser);
@@ -7,4 +8,4 @@ module.exports = function(app) {
     app.get('/api/user/:username', users.getUserByName);
     app.put('/api/user', users.updateUser);
     app.delete('/app/user/:id', users.deleteUser);
-}
+};

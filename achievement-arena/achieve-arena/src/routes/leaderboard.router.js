@@ -1,4 +1,5 @@
-module.exports = function(app) {
+module.exports = function (app)
+{
     var leaderboard = require('../controllers/leaderboard.controller.js');
 
     app.post('/api/leaderboard', leaderboard.addLeaderboard);
@@ -7,4 +8,4 @@ module.exports = function(app) {
     app.get('/api/leaderboard', leaderboard.getAllLeaderboards);
     app.put('/api/leaderboard', leaderboard.updateLeaderboard);
     app.delete('/app/leaderboard/:id', leaderboard.deleteLeaderboard);
-}
+};
