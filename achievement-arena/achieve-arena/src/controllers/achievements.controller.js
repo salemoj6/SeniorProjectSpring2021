@@ -136,9 +136,9 @@ exports.updateAchievements = (req, res) =>
 
 exports.getAchievementsByAppid = (req, res) =>
 {
-    const query = game.where({appid: req.params.appid});
+    const query = achievement.where({appid: req.params.appid});
 
-    query.findOne.select('-__v').then(game =>
+    query.findOne().then(game =>
                                       {
                                           res.status(200).json(game);
                                       }).catch(err =>

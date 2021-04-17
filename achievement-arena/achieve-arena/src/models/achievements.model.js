@@ -13,7 +13,4 @@ const achievementSchema = new mongoose.Schema({
                                                       }
                                                   ]
                                               });
-
-achievementSchema.plugin(require('mongoose-autopopulate'));
-
 module.exports = mongoose.model('achievement', achievementSchema);

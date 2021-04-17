@@ -50,7 +50,7 @@ exports.getGameByName = (req, res) =>
 {
     const query = game.where({name: req.params.name});
 
-    query.findOne.select('-__v').then(game =>
+    query.findOne().then(game =>
                                       {
                                           res.status(200).json(game);
                                       }).catch(err =>
@@ -157,25 +157,25 @@ exports.getGameByappid = (req, res) =>
 {
     const query = game.where({appid: req.params.appid});
 
-    query.findOne.select('-__v').then(game =>
+    query.findOne().then(game =>
                                       {
                                           res.status(200).json(game);
                                       }).catch(err =>
                                                {
-                                                   if (err.kind === 'String')
+                                                   if (err.kind === 'Number')
                                                    {
                                                        return res.status(404)
                                                                  .send(
                                                                      {
-                                                                         message: "game not found with name " +
-                                                                             req.params.name,
+                                                                         message: "game not found with appid " +
+                                                                             req.params.appid,
                                                                          error  : err
                                                                      });
                                                    }
                                                    return res.status(500).send(
                                                        {
-                                                           message: "Error retrieving game with name " +
-                                                               req.params.name,
+                                                           message: "Error retrieving game with appid " +
+                                                               req.params.appid,
                                                            error  : err
                                                        });
                                                });
