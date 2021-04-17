@@ -3,11 +3,10 @@ const game = require('../models/game.model.js');
 exports.addGame = (req, res) =>
 {
     const newGame = new game({
+                                 appid       : req.body.appid,
                                  name        : req.body.name,
-                                 steamID     : req.body.steamID,
-                                 gogID       : req.body.gogID,
-                                 system      : req.body.system,
-                                 achievements: req.body.achievements
+                                 img_icon_url: req.body.img_icon_url,
+                                 img_logo_url: req.body.img_logo_url
                              });
 
     newGame.save().then(data =>
@@ -154,3 +153,31 @@ exports.updateGame = (req, res) =>
                        });
 };
 
+exports.getGameByappid = (req, res) =>
+{
+    const query = game.where({appid: req.params.appid});
+
+    query.findOne.select('-__v').then(game =>
+                                      {
+                                          res.status(200).json(game);
+                                      }).catch(err =>
+                                               {
+                                                   if (err.kind === 'String')
+                                                   {
+                                                       return res.status(404)
+                                                                 .send(
+                                                                     {
+                                                                         message: "game not found with name " +
+                                                                             req.params.name,
+                                                                         error  : err
+                                                                     });
+                                                   }
+                                                   return res.status(500).send(
+                                                       {
+                                                           message: "Error retrieving game with name " +
+                                                               req.params.name,
+                                                           error  : err
+                                                       });
+                                               });
+
+};
