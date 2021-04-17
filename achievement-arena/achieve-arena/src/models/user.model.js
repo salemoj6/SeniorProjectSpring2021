@@ -19,9 +19,11 @@ const userSchema = new mongoose.Schema({
                                                        apiname   : String,
                                                        achieved  : Number,
                                                        unlocktime: Number
-                                                   }]
-                                           }]
-
+                                                   }],
+                                               visible     : String,
+                                               earnedPoints: Number
+                                           }],
+                                           profileTotal : Number
                                        });
 
 module.exports = mongoose.model('user', userSchema);

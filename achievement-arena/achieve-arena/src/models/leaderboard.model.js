@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const leaderboardSchema = new mongoose.Schema({
-                                                  game  : String,
+                                                  appid  : Number,
                                                   places: [{
                                                       user : Schema.Types.ObjectId,
                                                       place: Number,

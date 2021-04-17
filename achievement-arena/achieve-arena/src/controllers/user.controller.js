@@ -134,8 +134,16 @@ exports.updateUser = (req, res) =>
                 }
             ],
             ownedGames   : [{
-                steamNumber : req.body.steamNumber,
-                achievements: []
+                appid : req.body.appid,
+                achievements: [
+                    {
+                        apiname: req.body.apiname,
+                        achieved: req.body.achieved,
+                        unlocktime: req.body.unlocktime
+                    }
+                ],
+                visible: req.body.visible,
+                earnedPoints: req.body.earnedPoints
             }]
         },
         {new: true}

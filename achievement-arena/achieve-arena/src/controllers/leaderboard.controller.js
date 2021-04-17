@@ -3,7 +3,7 @@ const leaderboard = require('../models/leaderboard.model.js');
 exports.addLeaderboard = (req, res) =>
 {
     const newLeaderboard = new leaderboard({
-                                               game  : req.body.game,
+                                               appid  : req.body.appid,
                                                places: [{
                                                    user : req.body.user,
                                                    place: req.body.place,
@@ -125,7 +125,7 @@ exports.updateLeaderboard = (req, res) =>
     leaderboard.findByIdAndUpdate(
         req.body._id,
         {
-            game  : req.body.game,
+            appid  : req.body.appid,
             places: [{
                 user : req.body.user,
                 place: req.body.place,
