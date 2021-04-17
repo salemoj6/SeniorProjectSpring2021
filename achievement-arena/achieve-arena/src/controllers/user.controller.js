@@ -125,26 +125,8 @@ exports.updateUser = (req, res) =>
         {
             firstName    : req.body.firstName,
             lastName     : req.body.lastName,
-            otherProfiles: [
-                {
-                    steam: req.body.steam,
-                    gog  : req.body.gog,
-                    psn  : req.body.psn,
-                    xbox : req.body.xbox
-                }
-            ],
-            ownedGames   : [{
-                appid : req.body.appid,
-                achievements: [
-                    {
-                        apiname: req.body.apiname,
-                        achieved: req.body.achieved,
-                        unlocktime: req.body.unlocktime
-                    }
-                ],
-                visible: req.body.visible,
-                earnedPoints: req.body.earnedPoints
-            }]
+            otherProfiles: req.body.otherProfiles,
+            ownedGames   : req.body.ownedGames
         },
         {new: true}
     ).select('-__v')

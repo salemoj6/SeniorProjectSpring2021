@@ -4,11 +4,7 @@ exports.addLeaderboard = (req, res) =>
 {
     const newLeaderboard = new leaderboard({
                                                appid  : req.body.appid,
-                                               places: [{
-                                                   user : req.body.user,
-                                                   place: req.body.place,
-                                                   score: req.body.score
-                                               }]
+                                               places: req.body.places
                                            });
 
     newLeaderboard.save().then(data =>

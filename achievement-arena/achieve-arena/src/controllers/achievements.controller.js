@@ -4,17 +4,11 @@ exports.addAchievement = (req, res) =>
 {
     const newCheevo = new achievement({
                                           appid       : req.body.appid,
-                                          achievements: [
-                                              {
-                                                  name       : req.body.name,
-                                                  displayName: req.body.displayName,
-                                                  description: req.body.description,
-                                                  icon       : req.body.icon,
-                                                  icongray   : req.body.icongray,
-                                                  points     : req.body.points
-                                              }
-                                          ]
+                                          achievements: req.body.achievements
+
                                       });
+
+    console.log(newCheevo);
 
     newCheevo.save().then(data =>
                           {
@@ -139,26 +133,26 @@ exports.getAchievementsByAppid = (req, res) =>
     const query = achievement.where({appid: req.params.appid});
 
     query.findOne().then(game =>
+                         {
+                             res.status(200).json(game);
+                         }).catch(err =>
+                                  {
+                                      if (err.kind === 'String')
                                       {
-                                          res.status(200).json(game);
-                                      }).catch(err =>
-                                               {
-                                                   if (err.kind === 'String')
-                                                   {
-                                                       return res.status(404)
-                                                                 .send(
-                                                                     {
-                                                                         message: "game not found with appid " +
-                                                                             req.params.appid,
-                                                                         error  : err
-                                                                     });
-                                                   }
-                                                   return res.status(500).send(
-                                                       {
-                                                           message: "Error retrieving game with appid " +
-                                                               req.params.appid,
-                                                           error  : err
-                                                       });
-                                               });
+                                          return res.status(404)
+                                                    .send(
+                                                        {
+                                                            message: "game not found with appid " +
+                                                                req.params.appid,
+                                                            error  : err
+                                                        });
+                                      }
+                                      return res.status(500).send(
+                                          {
+                                              message: "Error retrieving game with appid " +
+                                                  req.params.appid,
+                                              error  : err
+                                          });
+                                  });
 
 };
